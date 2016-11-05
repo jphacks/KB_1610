@@ -16,7 +16,7 @@ class EntryOrExitMessage
   end
 
   def output
-    output = {
+    {
         "type": "template",
         "altText": "this is a Entry or Exit message",
         "template": {
