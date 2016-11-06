@@ -1,14 +1,19 @@
 
 class WelcomeMessage
+
+  def initialize
+    @hash
+    @event
+  end
+
   def update(changed_callback)
-    p "WELCOME"
     event = changed_callback.event
-    p event
+    @event = changed_callback.event
     if Message.is_postback?(event)
-      hash = Message.convert_hash(event)
-      if hash['action'] == 'welcome'
-        p hash
-        if hash.has_key?("shop_id")
+      @hash = Message.convert_hash(event)
+      if @hash['action'] == 'welcome'
+        if @hash.has_key?("shop_id")
+          order_group_create(event)
           Message.reply(event, output)
         else
           Message.reply(event, output_miss)
@@ -19,6 +24,14 @@ class WelcomeMessage
         Message.reply(event, output)
       end
     end
+  end
+
+  def order_group_create(event)
+    order = OrderGroup.find_or_create_by(
+        :line_group_id => event['source']['groupId'],
+        :shop_id => @hash['shop_id'],
+        :enter => true
+    )
   end
 
   def output
@@ -32,7 +45,7 @@ class WelcomeMessage
                 {
                     "type": "postback",
                     "label": "メニュー",
-                    "data": "action=show_menu_category"
+                    "data": "action=show_menu_category&shop_id=" + @hash['shop_id']
                 },
                 {
                     "type": "postback",
