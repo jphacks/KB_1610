@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105095011) do
+ActiveRecord::Schema.define(version: 20161106172831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "lists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "value"
+    t.string   "category"
+    t.text     "picture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "menus", force: :cascade do |t|
     t.string   "name"
@@ -21,9 +30,10 @@ ActiveRecord::Schema.define(version: 20161105095011) do
     t.text     "detail"
     t.string   "category"
     t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "shop_id"
+    t.integer  "category_id"
   end
 
   create_table "order_groups", force: :cascade do |t|

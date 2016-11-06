@@ -7,12 +7,16 @@ class ShowMenuMessage
     if Message.is_postback?(event)
       hash = Message.convert_hash(event)
       if hash['action'] == 'show_menu'
-        Message.reply(event, output(make_colums(choose_category(hash['category']))))
+        if hash["category"] == "STK"
+          Message.reply(event, output(make_colums(hash["category"],event)))
+        else
+          Message.reply(event, output(make_colums(choose_category(hash['category']),event)))
+        end
       end
     elsif Message.is_message?(event)
       for cate in Array['丼', '麺類', 'デザート'] do
         if event.message['text'].include?(cate)
-          Message.reply(event, output(make_colums(cate)))
+          Message.reply(event, output(make_colums(cate, event)))
           break
         end
       end
@@ -41,40 +45,60 @@ class ShowMenuMessage
     end
   end
 
-  def make_colums(category)
+  def make_colums(category, event)
     colums = []
-    for m in Menu.where(:category => category)
-      actions = make_actions(m.id.to_s)
-      colums.append(
-          {
-              "thumbnailImageUrl": m.picture,
-              "title": m.name,
-              "text": m.price.to_s + "円",
-              "actions": actions
-          }
-      )
+    if category == "STK"
+      group = OrderGroup.where(:line_group_id => event['source']["groupId"]).last
+      for m in Order.where(["ordered = ? and order_group_id = ?", false, group.id])
+        actions = make_actions(m.menu.id.to_s, event)
+        colums.append(
+        {
+          "thumbnailImageUrl": m.menu.picture,
+          "title": m.menu.name,
+          "text": m.menu.price.to_s + "円",
+          "actions": actions
+        }
+        )
+      end
+    else
+      for m in Menu.where(:category => category)
+        actions = make_actions(m.id.to_s, event)
+        colums.append(
+        {
+          "thumbnailImageUrl": m.picture,
+          "title": m.name,
+          "text": m.price.to_s + "円",
+          "actions": actions
+        }
+        )
+      end
     end
     colums
   end
 
-  def make_actions(id)
+  def make_actions(id, event)
     actions = []
     if @exist_group_id
-      if @exist_group_id['enter']
+      if @exist_group_id.enter == true
+        gid = @exist_group_id["id"]
         actions.push(
             {
                 "type": "postback",
                 "label": "注文",
-                "data": "action=order&itemid=" + id
+                "data": "action=order&itemid=#{id}&gid=#{gid}"
             }
         )
       end
+    end
+    group = OrderGroup.find_or_create_by(:line_group_id => event['source']["groupId"]) do |group|
+      group.enter = false,
+      group.shop_id = 1
     end
     actions.push(
         {
             "type": "postback",
             "label": "一旦置いとく",
-            "data": "action=add_tray&itemid=" + id
+            "data": "action=add_tray&itemid=#{id}&gid=#{group.id}"
         }
     )
     p actions

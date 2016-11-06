@@ -1,9 +1,12 @@
 
 class OrderCompleteMessage
+  def initialize(serif)
+        @serif = serif
+  end
   def output_message(context)
     {
        "type":  "text",
-       "text": name + "を注文しました"
+       "text": @serif
     }
   end
 end
