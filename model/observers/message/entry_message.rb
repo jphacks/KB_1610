@@ -1,24 +1,23 @@
 
 class EntryMessage
-  def update(changed_callback)
-    event = changed_callback.event
 
-    if Message.is_postback?(event)
-      hash = Message.convert_hash(event)
+  def update(changed_callback)
+    if Message.is_postback?(changed_callback.event)
+      hash = Message.convert_hash(changed_callback.event)
       if hash['action'] == 'entry'
-        Message.reply(event, output)
+        Message.reply(changed_callback.event, output(changed_callback))
       end
     end
   end
 
-  def output
+  def output(callback)
     welcome_output = WelcomeMessage.new
     [
         {
             :type => "text",
-            :text => "入店が完了しました",
+            :text => "Yu-Yuの入店が完了しました",
         },
-        welcome_output.output
+        welcome_output.update(callback)
     ]
   end
 end

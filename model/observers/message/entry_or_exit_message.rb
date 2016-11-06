@@ -27,13 +27,18 @@ class EntryOrExitMessage
                 {
                     "type": "postback",
                     "label": "入店",
-                    "data": "action=entry"
+                    "data": "action=welcome&shop_id=1"
                 },
                 {
                     "type": "postback",
                     "label": "退店",
                     "data": "action=exit"
-                }
+                },
+        {
+            "type": "postback",
+        "label": "入店失敗",
+        "data": "action=welcome"
+    }
             ]
         }
     }
