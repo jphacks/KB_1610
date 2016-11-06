@@ -40,6 +40,8 @@ class ResponceMessage
       message = MessageContext.new(GooMessage.new, event)
     elsif text.include?("ぐるなび")
       message = MessageContext.new(GuluMessage.new, event)
+    elsif text.include?("検索")
+      message = MessageContext.new(SearchMessage.new, event)
     else
       message = MessageContext.new(DefaultMessage.new, event)
     end

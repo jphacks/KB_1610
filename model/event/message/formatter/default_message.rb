@@ -1,4 +1,3 @@
-
 class DefaultMessage
   def output_message(context)
     require "docomoru"

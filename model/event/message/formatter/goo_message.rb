@@ -11,6 +11,7 @@ class GooMessage
     https.use_ssl=true
     responce = https.post('/api/entity', request_data, header)
     result = JSON.parse(responce.body)
+    p result['ne_list']
     result['ne_list'].each do |val, cate|
       context.value['message']['text'] = context.value['message']['text'] + "\n地名:#{val}" if cate == 'LOC'
       context.value['message']['text'] = context.value['message']['text'] + "\n日付:#{val}" if cate == 'DAT'
