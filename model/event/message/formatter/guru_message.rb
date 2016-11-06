@@ -53,10 +53,10 @@ class GuluMessage
       end
       json = JSON.parse(response.body)
 
-      shop_url1 = json["rest"][0]["url"].sub!(/http:/, "https:")
-      shop_url2 = json["rest"][1]["url"].sub!(/http:/, "https:")
-      shop_url3 = json["rest"][2]["url"].sub!(/http:/, "https:")
-      shop_url4 = json["rest"][3]["url"].sub!(/http:/, "https:")
+      shop_url1 = json["rest"][0]["url"]
+      shop_url2 = json["rest"][1]["url"]
+      shop_url3 = json["rest"][2]["url"]
+      shop_url4 = json["rest"][3]["url"]
 
       image_url1 = json["rest"][0]["image_url"]["shop_image1"].sub!(/http:/, "https:")
       image_url2 = json["rest"][1]["image_url"]["shop_image1"].sub!(/http:/, "https:")
