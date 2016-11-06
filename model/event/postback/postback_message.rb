@@ -15,9 +15,26 @@ class PostbackMessage
       end
     elsif hash.has_key?('action')
       action = hash['action']
+      itemid = hash["itemid"].to_i
+      groupid = hash["gid"]
       if action == 'order'
-        message = MessageContext.new(OrderCompleteMessage.new())
+        serif = "を注文しました"
+        menu = Menu.find(itemid)
+        order = Order.create(
+          :menu_id => menu.id,
+          :order_group_id => groupid,
+          :ordered => true
+          )
+      elsif action == 'add_tray'
+        serif = "をストックに入れました"
+        menu = Menu.find(itemid)
+        order = Order.create(
+          :menu_id => menu.id,
+          :order_group_id => groupid,
+          :ordered => false
+          )
       end
+        message = MessageContext.new(OrderCompleteMessage.new(order.menu.name + serif))
     else
       exit 1
     end

@@ -40,8 +40,8 @@ class ShowMenuCategoryMessage
                 },
                 {
                     "type": "postback",
-                    "label": "もどる",
-                    "data": "action=welcome"
+                    "label": "ストック",
+                    "data": "action=show_menu&category=STK"
                 }
             ]
         }
