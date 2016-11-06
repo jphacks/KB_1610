@@ -37,7 +37,33 @@ class GuluMessage
       json["pref"].each do |ap|
         pref = ap["pref_code"] if ap.select {|k, v| v.include?(key)} != {}
       end
+    #市町村規模での検索
+    conn = Faraday::Connection.new(url: 'http://api.gnavi.co.jp/master/GAreaLargeSearchAPI/20150630/') do |builder|
+      builder.use Faraday::Request::UrlEncoded
+      builder.use Faraday::Response::Logger
+      builder.use Faraday::Adapter::NetHttp
+    end
+
+      response = conn.get do |req|
+        req.params[:keyid] = gl_app_id
+        req.params[:format] = 'json'
+        req.headers['Content-Type'] = 'application/json; charset=UTF-8'
+      end
+      json = JSON.parse(response.body)
+
+
+      areacode_l = nil
+      json["garea_large"].each do |ap|
+        areacode_l = ap["areacode_l"] if ap["areaname_l"].include?(key)
+        #areacode_l = ap["areacode_l"] if ap.select {|k, v,| k.include?(key)} != {}
+      end
+
       p pref
+
+      p areacode_l
+
+
+
     #レストラン情報取得
     conn = Faraday::Connection.new(url: 'http://api.gnavi.co.jp/RestSearchAPI/20150630/') do |builder|
       builder.use Faraday::Request::UrlEncoded
@@ -47,18 +73,20 @@ class GuluMessage
       response = conn.get do |req|
         req.params[:keyid] = gl_app_id
         req.params[:format] = 'json'
-        req.params[:pref] = pref
+        req.params[:pref] = pref if pref != nil
+        req.params[:areacode_l] = areacode_l if areacode_l != nil
         req.params[:hit_per_page] = 4
         req.headers['Content-Type'] = 'application/json; charset=UTF-8'
       end
+
       json = JSON.parse(response.body)
 
       shop_url1 = json["rest"][0]["url"]
       shop_url2 = json["rest"][1]["url"]
       shop_url3 = json["rest"][2]["url"]
       shop_url4 = json["rest"][3]["url"]
-
-      image_url1 = json["rest"][0]["image_url"]["shop_image1"].sub!(/http:/, "https:")
+      
+      image_url1 = json["rest"][0]["image_url"]["shop_image1"].sub!(/http:/, "https:") if 
       image_url2 = json["rest"][1]["image_url"]["shop_image1"].sub!(/http:/, "https:")
       image_url3 = json["rest"][2]["image_url"]["shop_image1"].sub!(/http:/, "https:")
       image_url4 = json["rest"][3]["image_url"]["shop_image1"].sub!(/http:/, "https:")
