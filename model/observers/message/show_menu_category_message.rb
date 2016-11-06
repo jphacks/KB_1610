@@ -40,8 +40,8 @@ class ShowMenuCategoryMessage
                 },
                 {
                     "type": "postback",
-                    "label": "もどる",
-                    "data": "action=welcome"
+                    "label": "置いとくリスト",
+                    "data": "action=show_menu&category=DON"
                 }
             ]
         }

@@ -61,29 +61,37 @@ class ShowMenuMessage
     actions = []
     if @exist_group_id
       if @exist_group_id['enter']
+        # actions.push(
+        #     {
+        #         "type": "postback",
+        #         "label": "注文",
+        #         "data": "action=order&itemid=" + id
+        #     }
+        # )
         actions.push(
-            {
-                "type": "postback",
-                "label": "注文",
-                "data": "action=order&itemid=" + id
-            }
-        )
+         {
+             "type": "message",
+             "label": "注文",
+            "text": "注文"
+         }
+    )
       end
     end
-    # actions.push(
-    #     {
-    #         "type": "postback",
-    #         "label": "一旦置いとく",
+    #  actions.push(
+    #      {
+    #          "type": "postback",
+    #          "label": "一旦置いとく",
     #         "data": "action=add_tray&itemid=" + id
-    #     }
+    #      }
     # )
-    actions.push(
-        {
-            "type": "text",
-            "label": "一旦置いとく",
-            "data": "action=add_tray&itemid=" + id
-        }
+     actions.push(
+         {
+             "type": "message",
+             "label": "一旦置いとく",
+            "text": "一旦置いとく"
+         }
     )
+    
     p actions
     actions
   end

@@ -42,6 +42,10 @@ class ResponceMessage
       message = MessageContext.new(GuluMessage.new, event)
     elsif text.include?("検索")
       message = MessageContext.new(SearchMessage.new, event)
+    elsif text.include?("一旦置いとく")
+      message = MessageContext.new(MokMessage.new, event)
+    elsif text.include?("注文")
+      message = MessageContext.new(MokMessage.new, event)
     else
       message = MessageContext.new(DefaultMessage.new, event)
     end
