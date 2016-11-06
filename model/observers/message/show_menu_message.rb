@@ -70,9 +70,16 @@ class ShowMenuMessage
         )
       end
     end
+    # actions.push(
+    #     {
+    #         "type": "postback",
+    #         "label": "一旦置いとく",
+    #         "data": "action=add_tray&itemid=" + id
+    #     }
+    # )
     actions.push(
         {
-            "type": "postback",
+            "type": "text",
             "label": "一旦置いとく",
             "data": "action=add_tray&itemid=" + id
         }
