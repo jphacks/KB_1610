@@ -21,6 +21,4 @@ class EntryMessage
         welcome_output.output
     ]
   end
-
-
 end

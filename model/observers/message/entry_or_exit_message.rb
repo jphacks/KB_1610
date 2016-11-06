@@ -9,7 +9,7 @@ class EntryOrExitMessage
         Message.reply(event, output)
       end
     elsif Message.is_message?(event)
-      if event.message['text'].include?("入店")
+      if /(入店|退店|入退店)/ =~ event.message['text']
         Message.reply(event, output)
       end
     end
