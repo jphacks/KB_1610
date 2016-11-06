@@ -85,6 +85,9 @@ post '/callback' do
   callback_observer.add_observer(FirstTimeMessage.new)
   callback_observer.add_observer(ShowMenuCategoryMessage.new)
   callback_observer.add_observer(ShowMenuMessage.new)
+  callback_observer.add_observer(EntryOrExitMessage.new)
+  callback_observer.add_observer(EntryMessage.new)
+  callback_observer.add_observer(ExitMessage.new)
 
   events.each { |event|
     callback_observer.event = event

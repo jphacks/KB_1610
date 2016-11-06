@@ -1,12 +1,18 @@
 
 class WelcomeMessage
   def update(changed_callback)
+    p "WELCOME"
     event = changed_callback.event
-
+    p event
     if Message.is_postback?(event)
       hash = Message.convert_hash(event)
       if hash['action'] == 'welcome'
-        Message.reply(event, output)
+        p hash
+        if hash.has_key?("shop_id")
+          Message.reply(event, output)
+        else
+          Message.reply(event, output_miss)
+        end
       end
     elsif Message.is_message?(event)
       if event.message['text'].include?("ようこそ")
@@ -45,6 +51,13 @@ class WelcomeMessage
                 }
             ]
         }
+    }
+  end
+
+  def output_miss
+    {
+        :type => 'text',
+        :text => '入店に失敗しました'
     }
   end
 end
