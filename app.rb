@@ -88,6 +88,8 @@ post '/callback' do
   callback_observer.add_observer(EntryOrExitMessage.new)
   callback_observer.add_observer(EntryMessage.new)
   callback_observer.add_observer(ExitMessage.new)
+  callback_observer.add_observer(CheckMessage.new)
+  callback_observer.add_observer(CheckMessageSplit.new)
 
   events.each { |event|
     callback_observer.event = event
