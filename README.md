@@ -61,15 +61,14 @@ Bot機能による対話型でのメニュー参照
 Heroku
 #### API・データ
 * LINE messenger API
-* 
+* Goo API
+* Google Translate API
+* Docomo 雑談 API
+* ぐるなびAPI
 
 #### フレームワーク・ライブラリ・モジュール
 * Sinatra
 * LINE module
-
-#### デバイス
-* 
-* 
 
 ### 独自技術
 #### 期間中に開発した独自機能・技術
