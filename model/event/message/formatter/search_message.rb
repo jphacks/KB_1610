@@ -11,7 +11,6 @@ class SearchMessage
     responce = https.post('/api/morph', request_data, header)
     result = JSON.parse(responce.body)
     res = result['word_list'][0]
-    p res
     key = nil
     res.each do |val, cate|
         if cate == "名詞"
@@ -20,9 +19,8 @@ class SearchMessage
         end
     end
 
-    menu2 = self.search_menu(key)
+    menu = self.search_menu(key)
     #menu2 = Menu.where("name LIKE?", "%#{key}%").first
-    p menu2.name.to_s
     {
         "type": "template",
         "altText": "this is a carousel template",
@@ -30,30 +28,20 @@ class SearchMessage
             "type": "carousel",
             "columns": [
                 {
-                    "thumbnailImageUrl": menu2.picture.to_s,
-                    "title": menu2.name.to_s,
-                    "text": menu2.price.to_s,
+                    "thumbnailImageUrl": menu.picture.to_s,
+                    "title": menu.name.to_s,
+                    "text": menu.price.to_s,
                     "actions": [
                         {
                             "type": "postback",
-                            "label": "Buy",
-                            "data": "action=buy&itemid=111"
-                            },
-                            {
-                                "type": "postback",
-                                "label": "Add to cart",
-                                "data": "action=add&itemid=111"
-                                },
-                                {
-                                    "type": "uri",
-                                    "label": "View detail",
-                                    "uri": "http://example.com/page/111"
-                                }
-                            ]
-                        }
+                            "label": "注文",
+                            "data": "action=order&itemid=" + menu.id.to_s
+                        },
                     ]
                 }
-            }
+             ]
+        }
+    }
     end
         def search_menu(key)
     # images = [

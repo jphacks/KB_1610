@@ -53,6 +53,11 @@ class GuluMessage
       end
       json = JSON.parse(response.body)
 
+      shop_url1 = json["rest"][0]["url"]
+      shop_url2 = json["rest"][1]["url"]
+      shop_url3 = json["rest"][2]["url"]
+      shop_url4 = json["rest"][3]["url"]
+
       image_url1 = json["rest"][0]["image_url"]["shop_image1"].sub!(/http:/, "https:")
       image_url2 = json["rest"][1]["image_url"]["shop_image1"].sub!(/http:/, "https:")
       image_url3 = json["rest"][2]["image_url"]["shop_image1"].sub!(/http:/, "https:")
@@ -77,18 +82,18 @@ class GuluMessage
                     "actions": [
                         {
                             "type": "postback",
-                            "label": "Buy",
-                            "data": "action=buy&itemid=111"
+                            "label": "入店",
+                            "data": "action=welcome&shop_id=1"
                         },
                         {
                             "type": "postback",
-                            "label": "Add to cart",
-                            "data": "action=add&itemid=111"
+                            "label": "メニューを見る",
+                            "data": "action=show_menu_category&shop_id=1"
                         },
                         {
                             "type": "uri",
-                            "label": "View detail",
-                            "uri": "http://example.com/page/111"
+                            "label": "サイトを見る",
+                            "uri": shop_url1
                         }
                     ]
                 },
@@ -99,18 +104,18 @@ class GuluMessage
                     "actions": [
                         {
                             "type": "postback",
-                            "label": "Buy",
-                            "data": "action=buy&itemid=111"
+                            "label": "入店",
+                            "data": "action=welcome&shop_id=1"
                         },
                         {
                             "type": "postback",
-                            "label": "Add to cart",
-                            "data": "action=add&itemid=111"
+                            "label": "メニューを見る",
+                            "data": "action=show_menu_category&shop_id=1"
                         },
                         {
                             "type": "uri",
-                            "label": "View detail",
-                            "uri": "http://example.com/page/111"
+                            "label": "サイトを見る",
+                            "uri": shop_url2
                         }
                     ]
                 },
@@ -121,18 +126,18 @@ class GuluMessage
                     "actions": [
                         {
                             "type": "postback",
-                            "label": "Buy",
-                            "data": "action=buy&itemid=111"
+                            "label": "入店",
+                            "data": "action=welcome&shop_id=1"
                         },
                         {
                             "type": "postback",
-                            "label": "Add to cart",
-                            "data": "action=add&itemid=111"
+                            "label": "メニューを見る",
+                            "data": "action=show_menu_category&shop_id=1"
                         },
                         {
                             "type": "uri",
-                            "label": "View detail",
-                            "uri": "http://example.com/page/111"
+                            "label": "サイトを見る",
+                            "uri": shop_url3
                         }
                     ]
                 },
@@ -143,18 +148,18 @@ class GuluMessage
                     "actions": [
                         {
                             "type": "postback",
-                            "label": "Buy",
-                            "data": "action=buy&itemid=111"
+                            "label": "入店",
+                            "data": "action=welcome&shop_id=1"
                         },
                         {
                             "type": "postback",
-                            "label": "Add to cart",
-                            "data": "action=add&itemid=111"
+                            "label": "メニューを見る",
+                            "data": "action=show_menu_category&shop_id=1"
                         },
                         {
                             "type": "uri",
-                            "label": "View detail",
-                            "uri": "http://example.com/page/111"
+                            "label": "サイトを見る",
+                            "uri": shop_url4
                         }
                     ]
                 },
@@ -165,17 +170,17 @@ class GuluMessage
                     "actions": [
                         {
                             "type": "postback",
-                            "label": "Buy",
-                            "data": "action=buy&itemid=222"
+                            "label": "入店",
+                            "data": "action=welcome&shop_id=1"
                         },
                         {
                             "type": "postback",
-                            "label": "Add to cart",
-                            "data": "action=add&itemid=222"
+                            "label": "メニューを見る",
+                            "data": "action=show_menu_category&shop_id=1"
                         },
                         {
                             "type": "uri",
-                            "label": "View detail",
+                            "label": "サイトを見る",
                             "uri": "http://example.com/page/222"
                         }
                     ]
