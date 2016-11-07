@@ -4,7 +4,10 @@ class LocalMessage
     if Message.is_postback?(event)
     elsif Message.is_message?(event)
       if /(雑談)/ =~ event.message['text']
-        text = get_user_local_bot_reply(event.message["text"].delete("雑談"))
+        text = []
+        for 1..3 do |i|
+          text[i] = get_user_local_bot_reply(event.message["text"].delete("雑談"))
+        end
         Message.reply(event, output(text))
       end
     end
@@ -14,11 +17,15 @@ class LocalMessage
     [
       {
         type: "text",
-        text: text
+        text: text[1]
       },
       {
         type: "text",
-        text: text
+        text: text[2]
+      },
+      {
+        type: "text",
+        text: text[3]
       },
     ]
   end
