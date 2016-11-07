@@ -45,6 +45,8 @@ class LocalMessage
       when 4
         res = response
       end
+      p "aaaaaaaaaaaaaaaaaaaaaaaa"
         res_json = JSON.parse(res)
+        res_json["result"]
   end
 end
