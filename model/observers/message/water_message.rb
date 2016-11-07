@@ -1,7 +1,7 @@
 class WaterMessage
   def update(changed_callback)
     event = changed_callback.event
-    p event.message
+    p event.message["text"]
     if Message.is_postback?(event)
     elsif Message.is_message?(event)
       if /(お水|喉|こぼれた|溢れた)/ =~ event.message['text']
@@ -20,7 +20,7 @@ class WaterMessage
         },
         {
            type: "text",
-           text: "あ、お水ですね！少々お待ちください☺️"
+           text: "あ、お水ですね！少々お待ちください"
         },
         {
         type: "sticker",
