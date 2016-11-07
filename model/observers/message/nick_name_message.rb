@@ -15,7 +15,7 @@ class NickNameMessage
     [
       {
         type: "text",
-        text: "じゃあ、あなたのあだ名は✦「#{text}」"
+        text: "じゃあ、あなたのあだ名は「#{text}」ね！"
         }
       ]
     end
