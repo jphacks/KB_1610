@@ -1,7 +1,6 @@
 class WaterMessage
   def update(changed_callback)
     event = changed_callback.event
-    p event.message["text"]
     if Message.is_postback?(event)
     elsif Message.is_message?(event)
       if /(お水|喉|こぼれた|溢れた)/ =~ event.message['text']
