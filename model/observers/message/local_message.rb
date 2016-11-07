@@ -1,4 +1,4 @@
-class WaterMessage
+class LocalMessage
   def update(changed_callback)
     event = changed_callback.event
     if Message.is_postback?(event)
