@@ -21,7 +21,8 @@ class LocalMessage
   end
 
   def get_user_local_bot_reply(word)
-    response = RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: CGI.escape(word), character_type: "cat", platform: "line" } }
+    require 'rest-client'
+    response = RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: CGI.escape(word), character_type: cat } }
     response_json = JSON.parse(response)
     response_json['status'] == "success" ? response_json['result'] : '通信エラー'
   end
