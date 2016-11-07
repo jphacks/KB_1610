@@ -92,6 +92,8 @@ post '/callback' do
   callback_observer.add_observer(CheckMessageSplit.new)
   callback_observer.add_observer(WaterMessage.new)
   callback_observer.add_observer(LocalMessage.new)
+  callback_observer.add_observer(NickNameMessage.new)
+
 
   events.each { |event|
     callback_observer.event = event
