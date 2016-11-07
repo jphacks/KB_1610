@@ -15,11 +15,7 @@ class LocalMessage
     [
       {
         type: "text",
-        text: text[1].to_s
-        },
-        {
-          type: "text",
-          text: text[2].to_s
+        text: text
         }
       ]
     end
