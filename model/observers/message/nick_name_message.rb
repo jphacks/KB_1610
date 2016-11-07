@@ -16,12 +16,16 @@ class NickNameMessage
       {
         type: "text",
         text: "じゃあ、あなたのあだ名は「#{text}」ね！"
+        },
+        {
+        type: "sticker",
+        packageId: 2,
+        stickerId: 175
         }
       ]
     end
 
     def get_user_local_bot_reply(word)
-      p word
       response = RestClient.get 'https://chatbot-api.userlocal.jp/api/name', { params: { key: ENV['USR_LOCAL_API_KEY'], name: word} }
       response_json = JSON.parse(response)
       response_json["result"]["nickname"][rand(10)]
