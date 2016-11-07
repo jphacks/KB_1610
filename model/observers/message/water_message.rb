@@ -15,7 +15,7 @@ class WaterMessage
         {
         type: "sticker",
         packageId: 1,
-        stickerId: 1
+        stickerId: 17
         },
         {
            type: "text",
