@@ -31,9 +31,9 @@ class LocalMessage
     require 'rest-client'
     response = RestClient.get 'https://chatbot-api.userlocal.jp/api/chat', { params: { key: ENV['USR_LOCAL_API_KEY'], message: CGI.escape(word)} }
     response_json = JSON.parse(response)
-    cat_res =RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: response_json['result'], character_type: "cat"} }
-    dog_res =RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: response_json['result'], character_type: "dog"} }
-    roujin_res =RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: response_json['result'], character_type: "roujin"} }
+    cat_res =RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: response_json['result'] + "な", character_type: "cat"} }
+    dog_res =RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: response_json['result'] + "です", character_type: "dog"} }
+    roujin_res =RestClient.get 'https://chatbot-api.userlocal.jp/api/character', { params: { key: ENV['USR_LOCAL_API_KEY'], message: response_json['result'] + "だよ", character_type: "roujin"} }
     cat_res_json = JSON.parse(cat_res)
     dog_res_json = JSON.parse(dog_res)
     roujin_res_json = JSON.parse(roujin_res)
