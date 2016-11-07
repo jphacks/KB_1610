@@ -21,11 +21,11 @@ class LocalMessage
     end
 
     def get_user_local_bot_reply(word)
-      if /(犬)/ =~ word
-        word = word.delete("犬")
-        num = 1
-      elsif /(猫)/ =~ word
+      if /(猫)/ =~ word
         word = word.delete("猫")
+        num = 1
+      elsif /(犬)/ =~ word
+        word = word.delete("犬")
         num = 2
       elsif /(老人)/ =~ word
         word = word.delete("老人")
@@ -45,7 +45,6 @@ class LocalMessage
       when 4
         res = response
       end
-      p "aaaaaaaaaaaaaaaaaaaaaaaa"
         res_json = JSON.parse(res)
         res_json["result"]
   end
