@@ -21,6 +21,7 @@ class CheckMessage
           group.orders.each do |order|
           money += order.menu.price if order.ordered == true
         end
+          group.orders.destroy_all
           Message.reply(event, output(money))
         end
       end
