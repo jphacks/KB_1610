@@ -23,7 +23,6 @@ class NickNameMessage
     def get_user_local_bot_reply(word)
       response = RestClient.get 'https://chatbot-api.userlocal.jp/api/name', { params: { key: ENV['USR_LOCAL_API_KEY'], name: CGI.escape(word)} }
       response_json = JSON.parse(response)
-      p response_json["result"]["nickname"]
-      "あ"
+      response_json["result"]["nickname"][rand(10)]
   end
 end
