@@ -5,7 +5,6 @@ class WaterMessage
     if Message.is_postback?(event)
     elsif Message.is_message?(event)
       if /(お水|喉|こぼれた|溢れた)/ =~ event.message['text']
-        hash = Message.convert_hash(event)
         Message.reply(event, output)
       end
     end
