@@ -41,6 +41,7 @@ class LocalMessage
     p cat_res_json["result"]
     p dog_res_json["result"]
     p roujin_res_json["result"]
-    response_json['status'] == "success" ? response_json['result'] : '通信エラー'
+    #response_json['status'] == "success" ? response_json['result'] : '通信エラー'
+    roujin_res_json["result"]
   end
 end
