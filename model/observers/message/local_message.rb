@@ -33,7 +33,7 @@ class LocalMessage
       else
         num = 4
       end
-      response = RestClient.get 'https://chatbot-api.userlocal.jp/api/chat', { params: { key: ENV['USR_LOCAL_API_KEY'], message: CGI.escape(word)} }
+      response = RestClient.get 'https://chatbot-api.userlocal.jp/api/chat', { params: { key: ENV['USR_LOCAL_API_KEY'], message: word} }
       response_json = JSON.parse(response)
       case num
       when 1
