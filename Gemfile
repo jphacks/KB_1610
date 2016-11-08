@@ -27,3 +27,14 @@ gem "google-cloud-translate"
 #gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'faraday'
+
+gem "geocoder"
+
+gem 'carrierwave'
+gem "rmagick"
+gem "mini_magick"
+gem 'cloudinary'
+
+gem "mini_exiftool"
+
+gem "mini_exiftool_vendored"
