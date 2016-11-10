@@ -6,6 +6,9 @@ class NickNameMessage
       if /(ニックネーム)/ =~ event.message['text']
         event.message["text"] = event.message["text"].delete("ニックネーム")
         text = get_user_local_bot_reply(event.message["text"])
+        require "geocoder"
+        require "socket"
+        p IPSocket::getaddress(Socket::gethostname)
         Message.reply(event, output(text))
       end
     end
