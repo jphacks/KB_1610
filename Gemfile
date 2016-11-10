@@ -27,3 +27,5 @@ gem "google-cloud-translate"
 #gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'faraday'
+
+gem "geocoder"
