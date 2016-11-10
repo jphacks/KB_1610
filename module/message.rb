@@ -16,9 +16,10 @@ module Message
           when Line::Bot::Event::MessageType::Text
             res = client.reply_message(event['replyToken'], message)
           when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
-            response = client.get_message_content(event.message['id'])
-            tf = Tempfile.open("content")
-            tf.write(response.body)
+            # response = client.get_message_content(event.message['id'])
+            # tf = Tempfile.open("content")
+            # tf.write(response.body)
+            res = client.reply_message(event['replyToken'], message)
           else
             p "Noevent"
         end

@@ -1,0 +1,18 @@
+development:
+  cloud_name: hhn7webdk
+  api_key: '936597955914834'
+  api_secret: iWxS6dkA9v9IbFIJ_c-Jghfvvr4
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hhn7webdk
+  api_key: '936597955914834'
+  api_secret: iWxS6dkA9v9IbFIJ_c-Jghfvvr4
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hhn7webdk
+  api_key: '936597955914834'
+  api_secret: iWxS6dkA9v9IbFIJ_c-Jghfvvr4
+  enhance_image_tag: true
+  static_image_support: false
