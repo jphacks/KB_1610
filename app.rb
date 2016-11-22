@@ -8,6 +8,8 @@ require 'require_all'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require 'uri'
+require "geocoder"
+require "geocoder/railtie"
 # require 'date'
 require_all 'model'
 require_all 'module'
@@ -19,6 +21,7 @@ include Line
 # Load DB filesDB
 configure :production do
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+  Geocoder::Railtie.insert
 end
 
 configure :development do
@@ -73,20 +76,16 @@ end
 
 post '/callback' do
   body = request.body.read
-  # p body
   signature = request.env['HTTP_X_LINE_SIGNATURE']
   unless client.validate_signature(body, signature)
     error 400 do 'Bad Request' end
     end
     events = client.parse_events_from(body)
-  #p "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   p events
-  #p "bbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
   message_type = nil
   events.each { |event|
     message_type = event["message"]["type"] if event["type"] == "message"
     message_type = "postback" if event["type"] == "postback"
-    #client.leave_group(group_id)
   }
   callback_observer = CallbackSubject.instance
   callback_observer.delete_observers()
@@ -103,6 +102,7 @@ post '/callback' do
     callback_observer.add_observer(WaterMessage.new)
     callback_observer.add_observer(LocalMessage.new)
     callback_observer.add_observer(NickNameMessage.new)
+    callback_observer.add_observer(IndiaMessage.new)
   elsif message_type == "image"
     callback_observer.add_observer(ImageInfoMessage.new(client))
   else

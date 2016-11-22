@@ -1,5 +1,8 @@
 require "carrierwave"
 require "carrierwave/orm/activerecord"
+require 'geocoder'
+require "geocoder/railtie"
+Geocoder::Railtie.insert
 CarrierWave.configure do |config|
   config.root = File.dirname(__FILE__) + "/public"
 end

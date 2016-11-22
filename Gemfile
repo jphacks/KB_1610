@@ -23,7 +23,7 @@ gem "sinatra-activerecord", :require => 'sinatra/activerecord'
 
 gem "google-cloud-translate"
 
-#gem "mechanize"
+gem "mechanize"
 #gem 'dotenv-rails', :groups => [:development, :test]
 
 gem 'faraday'
@@ -38,3 +38,7 @@ gem 'cloudinary'
 gem "mini_exiftool"
 
 gem "mini_exiftool_vendored"
+gem 'gmaps4rails'
+
+gem 'capybara'
+gem 'poltergeist'
